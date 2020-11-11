@@ -2,104 +2,110 @@
 <v-container>
     <v-row class="text-center">
         <v-col class="mb-2">
-            <h1 class="display-2 font-weight-bold mb-3">
+            <h2 class="display-2 mb-3">
                 Shippop
-            </h1>
+            </h2>
 
             <p class="subheading font-weight-regular">
-                Tasks of Backend Developer
+                List Search Algorithms
             </p>
         </v-col>
 
         <v-col class="mb-2" cols="12">
             <v-row justify="center">
-                <v-col cols="8">
-                    <v-row align="center">
-                        <v-col cols="3">
-                            <h3>List</h3>
-                        </v-col>
+                <v-col cols="6">
+                    <v-row justify="start">
+                        <v-col cols="12">
+                            <v-row align="center">
+                                <v-col cols="3">
+                                    <h3>List</h3>
+                                </v-col>
 
-                        <v-col cols="9">
-                            <v-text-field v-model="lists_input" label="Ex: 4, 6, 12, 9, 18, 44" required>
-                            </v-text-field>
+                                <v-col cols="9">
+                                    <v-text-field v-model="lists_input" label="Ex: 4, 6, 12, 9, 18, 44" required>
+                                    </v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-row align="center">
+                                <v-col cols="3">
+                                    <h3>Algorithm</h3>
+                                </v-col>
+
+                                <v-select v-model="algorithm_select" :items="algorithms" dense></v-select>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-row align="center">
+                                <v-col cols="3">
+                                    <h3>Search</h3>
+                                </v-col>
+
+                                <v-col cols="6">
+                                    <v-text-field v-model="target_input" label="Ex: 9" type="number" required>
+                                    </v-text-field>
+                                </v-col>
+
+                                <v-col cols="3">
+                                    <v-btn @click="submit" :disabled="!allowSubmit" depressed block color="primary">
+                                        Submit
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col cols="8">
-                    <v-row align="center">
-                        <v-col cols="3">
-                            <h3>Algorithm</h3>
-                        </v-col>
 
-                        <v-select v-model="algorithm_select" :items="algorithms" dense></v-select>
-                    </v-row>
-                </v-col>
-                <v-col cols="8">
-                    <v-row align="center">
-                        <v-col cols="3">
-                            <h3>Search</h3>
-                        </v-col>
-
-                        <v-col cols="6">
-                            <v-text-field v-model="target_input" type="number" required>
-                            </v-text-field>
-                        </v-col>
-
-                        <v-col cols="3">
-                            <v-btn @click="submit" :disabled="!allowSubmit" depressed block color="primary">
-                                Submit
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-col>
-
-                <v-col cols="8">
-                    <v-row>
+                <v-col cols="6">
+                    <v-row justify="start">
                         <v-col cols="3">
                             <h3>Result</h3>
                         </v-col>
 
                         <v-col cols="9">
                             <v-card tile>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title class="d-flex justify-space-between">
-                                            <strong>List: </strong>
-                                            <p v-if="lists_input.length" key="lists_input.length">
-                                                {{ lists }}
-                                            </p>
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
+                                <v-list dense>
+                                    <v-list-item>
+                                        <v-list-item-content>
+                                            <v-list-item-title class="d-flex justify-space-between">
+                                                <strong>List: </strong>
+                                                <p v-if="lists_input.length" key="lists_input.length">
+                                                    {{ lists }}
+                                                </p>
+                                            </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
 
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title class="d-flex justify-space-between">
-                                            <strong>Search: </strong>
-                                            <p>{{ target_input }}</p>
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-content>
+                                            <v-list-item-title class="d-flex justify-space-between">
+                                                <strong>Search: </strong>
+                                                <p>{{ target_input }}</p>
+                                            </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
 
-                                <v-list-item v-for="([target, looking], index) in solutions" :key="index">
-                                    <v-list-item-content>
-                                        <v-list-item-title class="d-flex justify-start">
-                                            <strong>
-                                                Round: {{ index + 1 }} ===> {{ target }} != {{ looking }}
-                                            </strong>
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
+                                    <v-list-item v-for="([target, looking], index) in solutions" :key="index">
+                                        <v-list-item-content>
+                                            <v-list-item-title class="d-flex justify-start">
+                                                <strong>
+                                                    Round: {{ index + 1 }} ===> {{ target }} != {{ looking }}
+                                                </strong>
+                                            </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
 
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title class="d-flex justify-start">
-                                            <strong v-if="target_exist" key="target_exist">
-                                                Found !!
-                                            </strong>
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-content>
+                                            <v-list-item-title class="d-flex justify-start">
+                                                <strong v-if="target_exist" key="target_exist">
+                                                    Found !!
+                                                </strong>
+                                            </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list>
                             </v-card>
                         </v-col>
                     </v-row>
