@@ -1,9 +1,7 @@
 # shippop-searchingtask
 
 ## Visit web application
-```
-https://shippop-task-web.web.app/sorting
-```
+[Click Me](https://shippop-task-web.web.app/sorting)
 
 ## Project setup
 ```
